@@ -2,6 +2,7 @@ package com.globant.equattrocchio.cleanarchitecture.mvp.view.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.globant.equattrocchio.cleanarchitecture.R;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private ImagesPresenter presenter;
     private GetLatestImagesUseCase getLatestImagesUseCase;
     @BindView(R.id.tv_incoming_json) TextView tv;
+    @BindView(R.id.rv_images_list) RecyclerView rvImagesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

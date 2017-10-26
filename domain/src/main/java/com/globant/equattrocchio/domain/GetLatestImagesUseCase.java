@@ -2,9 +2,11 @@ package com.globant.equattrocchio.domain;
 
 import com.globant.equattrocchio.domain.service.ImagesServices;
 
+import java.util.Map;
+
 import io.reactivex.observers.DisposableObserver;
 
-public class GetLatestImagesUseCase extends UseCase<String,Void> {
+public class GetLatestImagesUseCase extends UseCase<Map<Integer, String>,Void> {
 
     private ImagesServices imagesServices;
 
@@ -14,7 +16,7 @@ public class GetLatestImagesUseCase extends UseCase<String,Void> {
     }
 
     @Override
-    void buildUseCaseObservable(DisposableObserver<String> observer, Void aVoid) {
+    void buildUseCaseObservable(DisposableObserver<Map<Integer, String>> observer, Void aVoid) {
         imagesServices.getLatestImages(observer);
     }
 }
