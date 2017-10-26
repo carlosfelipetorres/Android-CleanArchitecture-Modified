@@ -32,10 +32,11 @@ public class ImagesPresenter {
 
     private void onCallServiceButtonPressed() {
 
-        getLatestImagesUseCase.execute(new DisposableObserver<Boolean>() {
+        getLatestImagesUseCase.execute(new DisposableObserver<String>() {
             @Override
-            public void onNext(@NonNull Boolean aBoolean) {
+            public void onNext(@NonNull String aString) {
                 loadFromPreferences();
+                view.showText(aString);
             }
 
             @Override
