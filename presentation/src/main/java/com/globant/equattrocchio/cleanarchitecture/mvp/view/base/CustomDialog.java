@@ -62,7 +62,7 @@ public class CustomDialog extends DialogFragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dialog, container, false);
         View tv = v.findViewById(R.id.tv_id_image);
-        ((TextView)tv).setText(mId);
+        ((TextView)tv).setText(String.valueOf(mId));
 
         iv = v.findViewById(R.id.iv_full_image);
 

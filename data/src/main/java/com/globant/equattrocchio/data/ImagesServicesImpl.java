@@ -1,6 +1,10 @@
 package com.globant.equattrocchio.data;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.globant.equattrocchio.data.response.Image;
+import com.globant.equattrocchio.data.response.ImageDB;
 import com.globant.equattrocchio.data.response.Result;
 import com.globant.equattrocchio.data.service.api.SplashbaseApi;
 import com.globant.equattrocchio.domain.service.ImagesServices;
@@ -37,6 +41,7 @@ public class ImagesServicesImpl implements ImagesServices {
                     Map<Integer, String> images = new HashMap<>();
                     for (Image image : response.body().getImages()) {
                         images.put(image.getId(), image.getUrl());
+                        saveImage(image);
                     }
                     observer.onNext(images);
                     observer.onComplete();
@@ -78,6 +83,15 @@ public class ImagesServicesImpl implements ImagesServices {
             }
         });
 
+
+    }
+
+    private void saveImage(Image image) {
+        ImageDB imageToSave = new ImageDB();
+        imageToSave.imageId = image.getId();
+        imageToSave.largeUrl = image.getLargeUrl();
+        imageToSave.url = image.getUrl();
+        imageToSave.save();
 
     }
 }

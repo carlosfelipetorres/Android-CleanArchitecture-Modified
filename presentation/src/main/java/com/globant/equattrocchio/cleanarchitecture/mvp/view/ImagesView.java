@@ -1,5 +1,6 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.view;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ public class ImagesView extends ActivityView {
 
     @BindView(R.id.tv_incoming_json) TextView tvlabel;
     @BindView(R.id.rv_images_list) RecyclerView rvImagesList;
+    @BindView(R.id.fab_refresh) FloatingActionButton fabRefresh;
 
     private ImagesAdapter adapter;
 
@@ -44,6 +46,11 @@ public class ImagesView extends ActivityView {
 
     @OnClick(R.id.btn_call_service)
     public void callServiceBtnPressed() {
+        RxBus.post(new CallServiceButtonObserver.CallServiceButtonPressed());
+    }
+
+    @OnClick(R.id.fab_refresh)
+    public void callRefreshBtnPressed() {
         RxBus.post(new CallServiceButtonObserver.CallServiceButtonPressed());
     }
 
