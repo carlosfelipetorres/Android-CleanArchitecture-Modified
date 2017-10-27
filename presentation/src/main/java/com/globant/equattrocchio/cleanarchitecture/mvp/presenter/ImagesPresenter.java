@@ -8,6 +8,8 @@ import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.CallServic
 import com.globant.equattrocchio.data.ImagesServicesImpl;
 import com.globant.equattrocchio.domain.GetLatestImagesUseCase;
 
+import java.util.Map;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DefaultObserver;
 import io.reactivex.observers.DisposableObserver;
@@ -32,10 +34,11 @@ public class ImagesPresenter {
 
     private void onCallServiceButtonPressed() {
 
-        getLatestImagesUseCase.execute(new DisposableObserver<Boolean>() {
+        getLatestImagesUseCase.execute(new DisposableObserver<Map<Integer, String>>() {
             @Override
-            public void onNext(@NonNull Boolean aBoolean) {
+            public void onNext(@NonNull Map<Integer, String> images) {
                 loadFromPreferences();
+                view.showImageList(images);
             }
 
             @Override
