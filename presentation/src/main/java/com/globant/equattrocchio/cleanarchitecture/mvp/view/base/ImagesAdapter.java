@@ -2,6 +2,8 @@ package com.globant.equattrocchio.cleanarchitecture.mvp.view.base;
 
 
 import android.content.Context;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,13 +48,28 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        List<String> imagesUrl = new ArrayList<>(imagesMap.values());
-        String imageUrl = imagesUrl.get(position);
+        final List<String> imagesUrl = new ArrayList<>(imagesMap.values());
+        final List<Integer> imagesIds = new ArrayList<>(imagesMap.keySet());
+        final String imageUrl = imagesUrl.get(position);
+        final Integer imageId = imagesIds.get(position);
         Glide.with(mContext).load(imageUrl).into(holder.image);
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupMenu(imageId);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return imagesMap.size();
+    }
+
+    private void showPopupMenu(Integer id) {
+        DialogFragment customDialog = CustomDialog.newInstance(id);
+        AppCompatActivity activity = (AppCompatActivity) mContext;
+        customDialog.show(activity.getSupportFragmentManager(), "ImagesFragment");
     }
 }

@@ -7,4 +7,6 @@ import io.reactivex.Observer;
 public interface ImagesServices {
 
     void getLatestImages(Observer<Map<Integer, String>> observer);
+
+    void getSingleImage(Observer<String> observer, Integer imageId);
 }

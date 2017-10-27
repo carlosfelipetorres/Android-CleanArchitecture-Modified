@@ -34,7 +34,7 @@ public class ImagesView extends ActivityView {
     }
 
     public void showImageList(Map<Integer, String> imagesUrlsList) {
-        adapter = new ImagesAdapter(getContext(), imagesUrlsList);
+        adapter = new ImagesAdapter(getActivity(), imagesUrlsList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         rvImagesList.setLayoutManager(mLayoutManager);
