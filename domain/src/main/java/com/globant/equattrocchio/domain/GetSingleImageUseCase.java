@@ -6,17 +6,17 @@ import java.util.Map;
 
 import io.reactivex.observers.DisposableObserver;
 
-public class GetLatestImagesUseCase extends UseCase<Map<Integer, String>,Void> {
+public class GetSingleImageUseCase extends UseCase<String,Integer> {
 
     private ImagesServices imagesServices;
 
-    public GetLatestImagesUseCase(ImagesServices imagesServices) {
+    public GetSingleImageUseCase(ImagesServices imagesServices) {
         super();
         this.imagesServices = imagesServices;
     }
 
     @Override
-    void buildUseCaseObservable(DisposableObserver<Map<Integer, String>> observer, Void aVoid) {
-        imagesServices.getLatestImages(observer);
+    void buildUseCaseObservable(DisposableObserver<String> observer, Integer imageId) {
+        imagesServices.getSingleImage(observer, imageId);
     }
 }
