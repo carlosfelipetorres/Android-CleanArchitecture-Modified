@@ -87,11 +87,13 @@ public class ImagesServicesImpl implements ImagesServices {
     }
 
     private void saveImage(Image image) {
+        if(!ImageDB.getImageById(image.getId()).isEmpty()){
+            return;
+        }
         ImageDB imageToSave = new ImageDB();
         imageToSave.imageId = image.getId();
         imageToSave.largeUrl = image.getLargeUrl();
         imageToSave.url = image.getUrl();
         imageToSave.save();
-
     }
 }
