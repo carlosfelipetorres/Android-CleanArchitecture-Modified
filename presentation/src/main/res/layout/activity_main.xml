@@ -7,8 +7,11 @@
 
     <Button
         android:id="@+id/btn_call_service"
-        android:layout_width="@dimen/btn_widht"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="1dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/call_service"/>
 
     <TextView

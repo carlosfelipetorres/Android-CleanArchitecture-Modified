@@ -1,13 +1,16 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.view;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.pm.ActivityInfoCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
@@ -34,6 +37,7 @@ public class ImagesView extends ActivityView implements  LoaderManager.LoaderCal
     RecyclerView rvImagesList;
     @BindView(R.id.fab_refresh)
     FloatingActionButton fabRefresh;
+    RecyclerView.LayoutManager mLayoutManager;
 
     private ImagesAdapter adapter;
 
@@ -41,6 +45,13 @@ public class ImagesView extends ActivityView implements  LoaderManager.LoaderCal
         super(activity);
         ButterKnife.bind(this, activity);
         activity.getSupportLoaderManager().initLoader(0, null, this).forceLoad();
+
+        int orientation = activity.getResources().getConfiguration().orientation;
+        if(orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+            mLayoutManager = new LinearLayoutManager(getContext());
+        } else {
+            mLayoutManager = new GridLayoutManager(getContext(), 3);
+        }
     }
 
     public void showText(String text) {
@@ -50,7 +61,6 @@ public class ImagesView extends ActivityView implements  LoaderManager.LoaderCal
     public void showImageList(Map<Integer, String> imagesUrlsList) {
         adapter = new ImagesAdapter(getActivity(), imagesUrlsList);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         rvImagesList.setLayoutManager(mLayoutManager);
         rvImagesList.setItemAnimator(new DefaultItemAnimator());
         rvImagesList.setAdapter(adapter);
